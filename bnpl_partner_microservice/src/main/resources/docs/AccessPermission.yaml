@@ -1,0 +1,457 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /accesspermission:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - accesspermission
+      summary: Add new Access Permission
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Access Permission
+          required: true
+          schema:
+            $ref: '#/definitions/accesspermission'
+      responses:
+        '201':
+          description: An object with Access Permission details
+
+  /accesspermission/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - accesspermission
+      summary: List Access Permission
+      description: Search Access Permission 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: endPointname
+          in: query
+          description: endPointname values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: endPointname_mode
+          in: query
+          description: endPointname mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: add
+          in: query
+          description: add true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: edit
+          in: query
+          description: edit true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: read
+          in: query
+          description: read true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: delete
+          in: query
+          description: delete true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: username
+          in: query
+          description: username values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: username_mode
+          in: query
+          description: username mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/accesspermissionData'
+        '400':
+          description: Invalid status value
+/accesspermission/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - accesspermission
+      summary: List Access Permission
+      description: get all data without paging
+      parameters: 
+       
+        - name: endPointname
+          in: query
+          description: endPointname values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: endPointname_mode
+          in: query
+          description: endPointname mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: add
+          in: query
+          description: add true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: edit
+          in: query
+          description: edit true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: read
+          in: query
+          description: read true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: delete
+          in: query
+          description: delete true or false
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: true
+            enum:
+              - true
+              - false
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: username
+          in: query
+          description: username values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: username_mode
+          in: query
+          description: username mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/accesspermissionData'
+        '400':
+          description: Invalid status value
+/accesspermission/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - accesspermission
+      summary: List accesspermission
+      description: Keyward search data on endPointname,username
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on endPointname,username
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/accesspermissionData'
+        '400':
+          description: Invalid status value
+/accesspermission/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - accesspermission
+      summary: List accesspermission
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Access Permission by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/accesspermissionData'
+        '400':
+          description: Invalid status value
+definitions:
+  accesspermission:
+      type: object
+      properties:
+        
+        endPointname:
+            type: string
+        add:
+            type: boolean
+        edit:
+            type: boolean
+        read:
+            type: boolean
+        delete:
+            type: boolean
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        username:
+            type: string
+          
+
+  accesspermissionData:
+      type: object
+      properties:
+      
+        endPointname:
+            type: string
+        add:
+            type: boolean
+        edit:
+            type: boolean
+        read:
+            type: boolean
+        delete:
+            type: boolean
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        username:
+            type: string
+          
+    

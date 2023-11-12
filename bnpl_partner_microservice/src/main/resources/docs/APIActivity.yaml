@@ -1,0 +1,401 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /apiactivity:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - apiactivity
+      summary: Add new APIActivity
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new APIActivity
+          required: true
+          schema:
+            $ref: '#/definitions/apiactivity'
+      responses:
+        '201':
+          description: An object with APIActivity details
+
+  /apiactivity/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apiactivity
+      summary: List APIActivity
+      description: Search APIActivity 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: aPICallName
+          in: query
+          description: aPICallName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: aPICallName_mode
+          in: query
+          description: aPICallName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: errorDetails
+          in: query
+          description: errorDetails values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: errorDetails_mode
+          in: query
+          description: errorDetails mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/apiactivityData'
+        '400':
+          description: Invalid status value
+/apiactivity/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apiactivity
+      summary: List APIActivity
+      description: get all data without paging
+      parameters: 
+       
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: aPICallName
+          in: query
+          description: aPICallName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: aPICallName_mode
+          in: query
+          description: aPICallName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: errorDetails
+          in: query
+          description: errorDetails values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: errorDetails_mode
+          in: query
+          description: errorDetails mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/apiactivityData'
+        '400':
+          description: Invalid status value
+/apiactivity/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apiactivity
+      summary: List apiactivity
+      description: Keyward search data on aPICallName,errorDetails
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on aPICallName,errorDetails
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/apiactivityData'
+        '400':
+          description: Invalid status value
+/apiactivity/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apiactivity
+      summary: List apiactivity
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get APIActivity by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/apiactivityData'
+        '400':
+          description: Invalid status value
+definitions:
+  apiactivity:
+      type: object
+      properties:
+        
+        partnerId:
+            type: integer
+        aPICallName:
+            type: string
+        errorDetails:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+          
+
+  apiactivityData:
+      type: object
+      properties:
+      
+        partnerId:
+            type: integer
+        aPICallName:
+            type: string
+        errorDetails:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+          
+    

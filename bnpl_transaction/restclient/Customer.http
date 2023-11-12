@@ -1,0 +1,73 @@
+@HOST = http://localhost:8080
+@AUTH = authtoken
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/customer HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"sitclf",
+"address":"Duis fugiat et nisi velit aliqua laborum sint dolore cillum commodo deserunt.",
+"email":"aliquip@ucode.ai",
+"phone":"601783454735",
+"city":"duis",
+"state":"veniam",
+"postcode":"dolore",
+"status":"1.35"
+}
+
+###
+
+GET {{HOST}}/customer? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/customer?name=sitclf&address=Duis fugia&email=aliquip@uc&phone=6017834547&city=duis&state=veniam&postcode=dolore&status=1.35 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/customer/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/customer/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"sitclf",
+"address":"Duis fugiat et nisi velit aliqua laborum sint dolore cillum commodo deserunt.",
+"email":"aliquip@ucode.ai",
+"phone":"601783454735",
+"city":"duis",
+"state":"veniam",
+"postcode":"dolore",
+"status":"1.35"
+}
+###
+PATCH {{HOST}}/customer/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"sitclf",
+"address":"Duis fugiat et nisi velit aliqua laborum sint dolore cillum commodo deserunt.",
+"email":"aliquip@ucode.ai",
+"phone":"601783454735",
+"city":"duis",
+"state":"veniam",
+"postcode":"dolore",
+"status":"1.35"
+}
+###
+DELETE {{HOST}}/customer/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

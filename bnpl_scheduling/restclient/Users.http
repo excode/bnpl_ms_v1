@@ -1,0 +1,99 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6Ijc5ZDg0NzM5LTZlN2MtNGQ4MS1iZDVjLWJkMGQxODI1MGE3NyIsImZpcnN0bmFtZSI6IkJOUEwiLCJwZXJtaXNzaW9uTGV2ZWwiOjEsIm1vYmlsZSI6IjYwMTc2NDA4MjUwIiwidXNlcklkIjoiNzlkODQ3MzktNmU3Yy00ZDgxLWJkNWMtYmQwZDE4MjUwYTc3Iiwid2ViQWNjZXNzIjoxLCJlbWFpbCI6ImRmZGZAYm5wbC5jb20iLCJsYXN0bmFtZSI6IlRlc3QiLCJzdWIiOiJkZmRmQGJucGwuY29tIiwiaWF0IjoxNjk5NTIyMDE2LCJleHAiOjE2OTk1MzY0MTZ9.BA1Ugm2kQh-1DzxBlt5Zk0486H7gO8ZGQatY996NDO2ZamftGS92T_gIuYTiSDDg
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"dfdf@bnpl.com",
+"password":"123456"
+}
+
+
+###
+POST {{HOST}}/users HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"userType":"1",
+"lastname":"aliquip",
+"firstname":"adipisicing",
+"password":"ucode1234",
+"email":"adipisicing@ucode.ai4",
+"mobile":"nostrud2",
+"role":"sunt"
+}
+
+###
+
+#MAIN REGISTRATION for NODEJS VERSION
+POST {{HOST}}/users/reg HTTP/1.1
+content-type: application/json
+    
+{
+"email":"test@ucode.ai",
+"password":"123456",
+"firstname":"uCode",
+"lastname":"Test",
+"userType":"0",
+"mobile":"60176408250"
+}
+###
+#MAIN REGISTRATION for Java Spring boot
+POST {{HOST}}/reg HTTP/1.1
+content-type: application/json
+ 
+{
+"email":"dfdf@bnpl.com",
+"password":"123456",
+"firstname":"BNPL",
+"lastname":"Test",
+"usertype":"0",
+"mobile":"60176408250"
+}
+###
+
+GET {{HOST}}/users? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/users?userType=1&lastname=aliquip&firstname=adipisicin&email=adipisicin&mobile=nostrud2&role=sunt HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"userType":"1",
+"lastname":"aliquip",
+"firstname":"adipisicing",
+"password":"ucode1234",
+"email":"adipisicing@ucode.ai4",
+"mobile":"nostrud2",
+"role":"sunt"
+}
+###
+PATCH {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"userType":"1",
+"lastname":"aliquip",
+"firstname":"adipisicing",
+"password":"ucode1234",
+"email":"adipisicing@ucode.ai4",
+"mobile":"nostrud2",
+"role":"sunt"
+}
+###
+DELETE {{HOST}}/users/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

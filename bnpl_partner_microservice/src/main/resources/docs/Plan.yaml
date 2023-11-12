@@ -1,0 +1,453 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /plan:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - plan
+      summary: Add new Plan
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Plan
+          required: true
+          schema:
+            $ref: '#/definitions/plan'
+      responses:
+        '201':
+          description: An object with Plan details
+
+  /plan/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - plan
+      summary: List Plan
+      description: Search Plan 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: planName
+          in: query
+          description: planName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: planName_mode
+          in: query
+          description: planName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: noOfInstallment
+          in: query
+          description: noOfInstallment values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: noOfInstallment_mode
+          in: query
+          description: noOfInstallment mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: commision
+          in: query
+          description: commision values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: commision_mode
+          in: query
+          description: commision mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/planData'
+        '400':
+          description: Invalid status value
+/plan/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - plan
+      summary: List Plan
+      description: get all data without paging
+      parameters: 
+       
+        - name: planName
+          in: query
+          description: planName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: planName_mode
+          in: query
+          description: planName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: noOfInstallment
+          in: query
+          description: noOfInstallment values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: noOfInstallment_mode
+          in: query
+          description: noOfInstallment mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: commision
+          in: query
+          description: commision values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: commision_mode
+          in: query
+          description: commision mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/planData'
+        '400':
+          description: Invalid status value
+/plan/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - plan
+      summary: List plan
+      description: Keyward search data on planName
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on planName
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/planData'
+        '400':
+          description: Invalid status value
+/plan/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - plan
+      summary: List plan
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Plan by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/planData'
+        '400':
+          description: Invalid status value
+definitions:
+  plan:
+      type: object
+      properties:
+        
+        planName:
+            type: string
+        status:
+            type: integer
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        noOfInstallment:
+            type: integer
+        commision:
+            type: number
+            format: double
+              
+
+  planData:
+      type: object
+      properties:
+      
+        planName:
+            type: string
+        status:
+            type: integer
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        noOfInstallment:
+            type: integer
+        commision:
+            type: number
+            format: double
+              
+    

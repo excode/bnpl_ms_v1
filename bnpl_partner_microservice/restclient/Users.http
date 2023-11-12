@@ -1,0 +1,58 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjU5OTZmYTkxLWFkMWItNDgzMC1hZDMxLTJmYWM3YjM5NjBhMSIsImZpcnN0bmFtZSI6IkJOUEwiLCJwZXJtaXNzaW9uTGV2ZWwiOjEsIm1vYmlsZSI6IjYwMTc2NDA4MjUwIiwidXNlcklkIjoiNTk5NmZhOTEtYWQxYi00ODMwLWFkMzEtMmZhYzdiMzk2MGExIiwid2ViQWNjZXNzIjoxLCJlbWFpbCI6Im51ckBibnBsLmNvbSIsImxhc3RuYW1lIjoiVGVzdCIsInN1YiI6Im51ckBibnBsLmNvbSIsImlhdCI6MTY5OTY3Nzc4MiwiZXhwIjoxNjk5NjkyMTgyfQ.I_6oWKVovIvFbml0S0oEEtw-OCRAIhY1iOf9IX7ojMxTH7yw4lBdW0kKL7calFR-
+@TESTID = 8d5b6bed-d7ba-47a4-a7d7-69b34217ff99
+@TESTID2 = 5996fa91-ad1b-4830-ad31-2fac7b3960a1
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"nur@bnpl.com",
+"password":"123456"
+}
+
+
+
+###
+#MAIN REGISTRATION for Java Spring boot
+POST {{HOST}}/reg HTTP/1.1
+content-type: application/json
+ 
+{
+"email":"jnur@bnpl.com",
+"password":"123456",
+"firstname":"BNPL",
+"lastname":"Test",
+"usertype":"0",
+"mobile":"60176408250"
+}
+###
+
+GET {{HOST}}/users? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/users?userType=1&lastname=aliquip&firstname=adipisicin&email=adipisicin&mobile=nostrud2&role=sunt HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PATCH {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"userType":"1",
+"lastname":"aliquip",
+"firstname":"Riad",
+"password":"ucode1234",
+"email":"adipisicing@ucode.ai4",
+"mobile":"nostrud2",
+"role":"sunt"
+}
+###
+DELETE {{HOST}}/users/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

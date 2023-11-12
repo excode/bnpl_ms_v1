@@ -1,0 +1,61 @@
+@HOST = http://localhost:8080
+@AUTH = authtoken
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/activitylog HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"partnerName":"ullamco",
+"email":"magna",
+"status":"1",
+"transaction":"esse"
+}
+
+###
+
+GET {{HOST}}/activitylog? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/activitylog?partnerName=ullamco&email=magna&status=1&transaction=esse HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/activitylog/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/activitylog/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"partnerName":"ullamco",
+"email":"magna",
+"status":"1",
+"transaction":"esse"
+}
+###
+PATCH {{HOST}}/activitylog/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"partnerName":"ullamco",
+"email":"magna",
+"status":"1",
+"transaction":"esse"
+}
+###
+DELETE {{HOST}}/activitylog/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

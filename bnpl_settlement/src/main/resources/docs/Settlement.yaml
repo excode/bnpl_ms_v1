@@ -1,0 +1,409 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /settlement:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - settlement
+      summary: Add new Settlement
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Settlement
+          required: true
+          schema:
+            $ref: '#/definitions/settlement'
+      responses:
+        '201':
+          description: An object with Settlement details
+
+  /settlement/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - settlement
+      summary: List Settlement
+      description: Search Settlement 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: account
+          in: query
+          description: account values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: account_mode
+          in: query
+          description: account mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/settlementData'
+        '400':
+          description: Invalid status value
+/settlement/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - settlement
+      summary: List Settlement
+      description: get all data without paging
+      parameters: 
+       
+        - name: account
+          in: query
+          description: account values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: account_mode
+          in: query
+          description: account mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/settlementData'
+        '400':
+          description: Invalid status value
+/settlement/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - settlement
+      summary: List settlement
+      description: Keyward search data on account
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on account
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/settlementData'
+        '400':
+          description: Invalid status value
+/settlement/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - settlement
+      summary: List settlement
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Settlement by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/settlementData'
+        '400':
+          description: Invalid status value
+definitions:
+  settlement:
+      type: object
+      properties:
+        
+        account:
+            type: string
+        duedate:
+            type: string
+            format: date-time
+        status:
+            type: integer
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+          
+
+  settlementData:
+      type: object
+      properties:
+      
+        account:
+            type: string
+        duedate:
+            type: string
+            format: date-time
+        status:
+            type: integer
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+          
+    

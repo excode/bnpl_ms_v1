@@ -1,0 +1,603 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /installments:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - installments
+      summary: Add new Installments
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Installments
+          required: true
+          schema:
+            $ref: '#/definitions/installments'
+      responses:
+        '201':
+          description: An object with Installments details
+
+  /installments/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - installments
+      summary: List Installments
+      description: Search Installments 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: installmentNumber
+          in: query
+          description: installmentNumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: installmentNumber_mode
+          in: query
+          description: installmentNumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: installmentAmount
+          in: query
+          description: installmentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: installmentAmount_mode
+          in: query
+          description: installmentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: latePaymentFee
+          in: query
+          description: latePaymentFee values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: latePaymentFee_mode
+          in: query
+          description: latePaymentFee mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: customerId
+          in: query
+          description: customerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: customerId_mode
+          in: query
+          description: customerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/installmentsData'
+        '400':
+          description: Invalid status value
+/installments/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - installments
+      summary: List Installments
+      description: get all data without paging
+      parameters: 
+       
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: installmentNumber
+          in: query
+          description: installmentNumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: installmentNumber_mode
+          in: query
+          description: installmentNumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: installmentAmount
+          in: query
+          description: installmentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: installmentAmount_mode
+          in: query
+          description: installmentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: latePaymentFee
+          in: query
+          description: latePaymentFee values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: latePaymentFee_mode
+          in: query
+          description: latePaymentFee mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: customerId
+          in: query
+          description: customerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: customerId_mode
+          in: query
+          description: customerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/installmentsData'
+        '400':
+          description: Invalid status value
+/installments/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - installments
+      summary: List installments
+      description: Keyward search data on customerId
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on customerId
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/installmentsData'
+        '400':
+          description: Invalid status value
+/installments/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - installments
+      summary: List installments
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Installments by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/installmentsData'
+        '400':
+          description: Invalid status value
+definitions:
+  installments:
+      type: object
+      properties:
+        
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        transactionID:
+            type: integer
+        installmentNumber:
+            type: integer
+        installmentAmount:
+            type: integer
+        dueDate:
+            type: string
+            format: date-time
+        latePaymentFee:
+            type: number
+            format: double
+        partnerId:
+            type: integer
+        status:
+            type: integer
+        customerId:
+            type: string
+          
+
+  installmentsData:
+      type: object
+      properties:
+      
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        transactionID:
+            type: integer
+        installmentNumber:
+            type: integer
+        installmentAmount:
+            type: integer
+        dueDate:
+            type: string
+            format: date-time
+        latePaymentFee:
+            type: number
+            format: double
+        partnerId:
+            type: integer
+        status:
+            type: integer
+        customerId:
+            type: string
+          
+    

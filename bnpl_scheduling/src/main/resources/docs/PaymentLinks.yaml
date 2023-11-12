@@ -1,0 +1,551 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /paymentlinks:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - paymentlinks
+      summary: Add new Payment Links
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Payment Links
+          required: true
+          schema:
+            $ref: '#/definitions/paymentlinks'
+      responses:
+        '201':
+          description: An object with Payment Links details
+
+  /paymentlinks/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - paymentlinks
+      summary: List Payment Links
+      description: Search Payment Links 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: customerID
+          in: query
+          description: customerID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: customerID_mode
+          in: query
+          description: customerID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: paymentLinkURL
+          in: query
+          description: paymentLinkURL values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: paymentLinkURL_mode
+          in: query
+          description: paymentLinkURL mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: paymentAmount
+          in: query
+          description: paymentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: paymentAmount_mode
+          in: query
+          description: paymentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/paymentlinksData'
+        '400':
+          description: Invalid status value
+/paymentlinks/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - paymentlinks
+      summary: List Payment Links
+      description: get all data without paging
+      parameters: 
+       
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: customerID
+          in: query
+          description: customerID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: customerID_mode
+          in: query
+          description: customerID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: paymentLinkURL
+          in: query
+          description: paymentLinkURL values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: paymentLinkURL_mode
+          in: query
+          description: paymentLinkURL mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: paymentAmount
+          in: query
+          description: paymentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: paymentAmount_mode
+          in: query
+          description: paymentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/paymentlinksData'
+        '400':
+          description: Invalid status value
+/paymentlinks/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - paymentlinks
+      summary: List paymentlinks
+      description: Keyward search data on paymentLinkURL
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on paymentLinkURL
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/paymentlinksData'
+        '400':
+          description: Invalid status value
+/paymentlinks/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - paymentlinks
+      summary: List paymentlinks
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Payment Links by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/paymentlinksData'
+        '400':
+          description: Invalid status value
+definitions:
+  paymentlinks:
+      type: object
+      properties:
+        
+        transactionID:
+            type: integer
+        customerID:
+            type: integer
+        paymentLinkURL:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: number
+            format: double
+        paymentAmount:
+            type: number
+            format: double
+        status:
+            type: integer
+          
+
+  paymentlinksData:
+      type: object
+      properties:
+      
+        transactionID:
+            type: integer
+        customerID:
+            type: integer
+        paymentLinkURL:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: number
+            format: double
+        paymentAmount:
+            type: number
+            format: double
+        status:
+            type: integer
+          
+    

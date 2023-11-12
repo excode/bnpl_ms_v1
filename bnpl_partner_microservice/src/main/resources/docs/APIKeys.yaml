@@ -1,0 +1,461 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /apikeys:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - apikeys
+      summary: Add new APIKeys
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new APIKeys
+          required: true
+          schema:
+            $ref: '#/definitions/apikeys'
+      responses:
+        '201':
+          description: An object with APIKeys details
+
+  /apikeys/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apikeys
+      summary: List APIKeys
+      description: Search APIKeys 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: keyValue
+          in: query
+          description: keyValue values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: keyValue_mode
+          in: query
+          description: keyValue mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: permissions
+          in: query
+          description: permissions values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: permissions_mode
+          in: query
+          description: permissions mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/apikeysData'
+        '400':
+          description: Invalid status value
+/apikeys/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apikeys
+      summary: List APIKeys
+      description: get all data without paging
+      parameters: 
+       
+        - name: keyValue
+          in: query
+          description: keyValue values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: keyValue_mode
+          in: query
+          description: keyValue mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: permissions
+          in: query
+          description: permissions values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: permissions_mode
+          in: query
+          description: permissions mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/apikeysData'
+        '400':
+          description: Invalid status value
+/apikeys/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apikeys
+      summary: List apikeys
+      description: Keyward search data on keyValue,permissions
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on keyValue,permissions
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/apikeysData'
+        '400':
+          description: Invalid status value
+/apikeys/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - apikeys
+      summary: List apikeys
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get APIKeys by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/apikeysData'
+        '400':
+          description: Invalid status value
+definitions:
+  apikeys:
+      type: object
+      properties:
+        
+        keyValue:
+            type: string
+        permissions:
+            type: string
+        issueDate:
+            type: string
+            format: date-time
+        expiryDate:
+            type: string
+            format: date-time
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+        status:
+            type: integer
+          
+
+  apikeysData:
+      type: object
+      properties:
+      
+        keyValue:
+            type: string
+        permissions:
+            type: string
+        issueDate:
+            type: string
+            format: date-time
+        expiryDate:
+            type: string
+            format: date-time
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+        status:
+            type: integer
+          
+    

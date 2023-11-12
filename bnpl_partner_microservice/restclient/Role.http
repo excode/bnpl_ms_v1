@@ -1,0 +1,55 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTY3OTc1NywiZXhwIjoxNjk5Njk0MTU3fQ.hB7CiLtx6LRWLttMjbV--9ttZdX9gqc8a-_V5JR531ByJRtmmej_mMj74cowsHqg
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/role HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"Manager",
+"status":"1"
+}
+
+###
+
+GET {{HOST}}/role? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/role?name=tempor&status=1 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/role/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/role/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"tempor",
+"status":"1"
+}
+###
+PATCH {{HOST}}/role/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"tempor",
+"status":"1"
+}
+###
+DELETE {{HOST}}/role/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

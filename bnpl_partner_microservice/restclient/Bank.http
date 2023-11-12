@@ -1,0 +1,73 @@
+@HOST = http://localhost:8084
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTc4Njk4MCwiZXhwIjoxNjk5ODAxMzgwfQ.5yjjSQr4rIYcTDeOLve_qT7eR9FYPlf33-Ni02a-5V4FyJba3cmrVX10p9REM3SH
+@TESTID = 1
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/bank HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"new124",
+"accountName":"idclf",
+"swift":"quiclf",
+"accountNumber":"1.35",
+"city":"dolor",
+"country":"doclf",
+"address":"Deserunt est tempor dolore deserunt Lorem velit.",
+"postcode":"1.35"
+}
+
+###
+
+GET {{HOST}}/bank? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/bank?name=velit&accountName=idclf&swift=quiclf&accountNumber=1.35&city=dolor&country=doclf&address=Deserunt e&postcode=1.35 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/bank/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/bank/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"velit",
+"accountName":"idclf",
+"swift":"quiclf",
+"accountNumber":"1.35",
+"city":"dolor",
+"country":"doclf",
+"address":"Deserunt est tempor dolore deserunt Lorem velit.",
+"postcode":"1.35"
+}
+###
+PATCH {{HOST}}/bank/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"velit",
+"accountName":"idclf",
+"swift":"quiclf",
+"accountNumber":"1.35",
+"city":"dolor",
+"country":"doclf",
+"address":"Deserunt est tempor dolore deserunt Lorem velit.",
+"postcode":"1.35"
+}
+###
+DELETE {{HOST}}/bank/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

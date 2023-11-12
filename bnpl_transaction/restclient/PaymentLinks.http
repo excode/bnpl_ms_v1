@@ -1,0 +1,67 @@
+@HOST = http://localhost:8080
+@AUTH = authtoken
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/paymentlinks HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"transactionID":"1",
+"customerID":"1",
+"paymentLinkURL":"aliquip",
+"partnerId":"1.35",
+"paymentAmount":"1.35",
+"status":"1"
+}
+
+###
+
+GET {{HOST}}/paymentlinks? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/paymentlinks?transactionID=1&customerID=1&paymentLinkURL=aliquip&partnerId=1.35&paymentAmount=1.35&status=1 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/paymentlinks/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/paymentlinks/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"transactionID":"1",
+"customerID":"1",
+"paymentLinkURL":"aliquip",
+"partnerId":"1.35",
+"paymentAmount":"1.35",
+"status":"1"
+}
+###
+PATCH {{HOST}}/paymentlinks/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"transactionID":"1",
+"customerID":"1",
+"paymentLinkURL":"aliquip",
+"partnerId":"1.35",
+"paymentAmount":"1.35",
+"status":"1"
+}
+###
+DELETE {{HOST}}/paymentlinks/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

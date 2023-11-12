@@ -1,0 +1,637 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /bank:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - bank
+      summary: Add new Bank
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Bank
+          required: true
+          schema:
+            $ref: '#/definitions/bank'
+      responses:
+        '201':
+          description: An object with Bank details
+
+  /bank/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bank
+      summary: List Bank
+      description: Search Bank 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: name
+          in: query
+          description: name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: name_mode
+          in: query
+          description: name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: accountName
+          in: query
+          description: accountName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: accountName_mode
+          in: query
+          description: accountName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: swift
+          in: query
+          description: swift values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: swift_mode
+          in: query
+          description: swift mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: accountNumber
+          in: query
+          description: accountNumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: accountNumber_mode
+          in: query
+          description: accountNumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: city
+          in: query
+          description: city values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: city_mode
+          in: query
+          description: city mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: country
+          in: query
+          description: country values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: country_mode
+          in: query
+          description: country mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: address
+          in: query
+          description: address values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: address_mode
+          in: query
+          description: address mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: postcode
+          in: query
+          description: postcode values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: postcode_mode
+          in: query
+          description: postcode mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/bankData'
+        '400':
+          description: Invalid status value
+/bank/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bank
+      summary: List Bank
+      description: get all data without paging
+      parameters: 
+       
+        - name: name
+          in: query
+          description: name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: name_mode
+          in: query
+          description: name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: accountName
+          in: query
+          description: accountName values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: accountName_mode
+          in: query
+          description: accountName mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: swift
+          in: query
+          description: swift values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: swift_mode
+          in: query
+          description: swift mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: accountNumber
+          in: query
+          description: accountNumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: accountNumber_mode
+          in: query
+          description: accountNumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: city
+          in: query
+          description: city values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: city_mode
+          in: query
+          description: city mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: country
+          in: query
+          description: country values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: country_mode
+          in: query
+          description: country mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: address
+          in: query
+          description: address values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: address_mode
+          in: query
+          description: address mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: postcode
+          in: query
+          description: postcode values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: postcode_mode
+          in: query
+          description: postcode mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankData'
+        '400':
+          description: Invalid status value
+/bank/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bank
+      summary: List bank
+      description: Keyward search data on name,accountName,swift,city,country,address
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on name,accountName,swift,city,country,address
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankData'
+        '400':
+          description: Invalid status value
+/bank/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bank
+      summary: List bank
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Bank by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/bankData'
+        '400':
+          description: Invalid status value
+definitions:
+  bank:
+      type: object
+      properties:
+        
+        name:
+            type: string
+        accountName:
+            type: string
+        swift:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        accountNumber:
+            type: number
+            format: double
+        city:
+            type: string
+        country:
+            type: string
+        address:
+            type: string
+        postcode:
+            type: number
+            format: double
+              
+
+  bankData:
+      type: object
+      properties:
+      
+        name:
+            type: string
+        accountName:
+            type: string
+        swift:
+            type: string
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        accountNumber:
+            type: number
+            format: double
+        city:
+            type: string
+        country:
+            type: string
+        address:
+            type: string
+        postcode:
+            type: number
+            format: double
+              
+    

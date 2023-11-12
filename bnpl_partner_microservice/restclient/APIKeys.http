@@ -1,0 +1,55 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTc4MTQ0NywiZXhwIjoxNjk5Nzk1ODQ3fQ.1H_JVYOA47IVu--pm488tI1BEE5KprKAH8kgpTcfb1gTeWAV1nWyaRp0y2GmDKIl
+@TESTID = 3
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/apikeys HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"keyValue":"deserunt",
+"permissions":"culpa",
+"issueDate":"2023-12-08T09:28:27.580Z",
+"expiryDate":"2023-12-08T09:28:27.580Z",
+"partnerId":"1",
+"status":"1"
+}
+
+###
+
+GET {{HOST}}/apikeys? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/apikeys?keyValue=deserunt&permissions=culpa&issueDate=2023-12-08&expiryDate=2023-12-08&partnerId=1&status=1 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/apikeys/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PATCH {{HOST}}/apikeys/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+    "endPointname": "commodo",
+    "adds": false,
+    "edits": false,
+    "reads": false,
+    "deletes": false,
+    "username": "nur"
+}
+
+###
+DELETE {{HOST}}/apikeys/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

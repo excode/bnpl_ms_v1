@@ -1,0 +1,50 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTc4MTQ0NywiZXhwIjoxNjk5Nzk1ODQ3fQ.1H_JVYOA47IVu--pm488tI1BEE5KprKAH8kgpTcfb1gTeWAV1nWyaRp0y2GmDKIl
+@TESTID = 2
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/feedback HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"partnerId":"1",
+"rating":"1.950",
+"feedbackText":"Ad voluptate eiusmod labore ad ut culpa est excepteur ipsum eu officia veniam.",
+"submissionDate":"2023-12-08T09:28:27.839Z"
+}
+
+###
+
+GET {{HOST}}/feedback? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/feedback?partnerId=1&rating=1.95000000&feedbackText=Ad volupta&submissionDate=2023-12-08 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/feedback/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PATCH {{HOST}}/feedback/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"partnerId":"3",
+"rating":"1.950",
+"feedbackText":"Ad good eiusmod labore ad ut culpa est excepteur ipsum eu officia veniam.",
+"submissionDate":"2023-12-08T09:28:27.839Z"
+}
+###
+DELETE {{HOST}}/feedback/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

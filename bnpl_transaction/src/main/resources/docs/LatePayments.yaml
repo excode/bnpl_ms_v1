@@ -1,0 +1,509 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /latepayments:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - latepayments
+      summary: Add new Late Payments
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Late Payments
+          required: true
+          schema:
+            $ref: '#/definitions/latepayments'
+      responses:
+        '201':
+          description: An object with Late Payments details
+
+  /latepayments/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - latepayments
+      summary: List Late Payments
+      description: Search Late Payments 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: customerID
+          in: query
+          description: customerID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: customerID_mode
+          in: query
+          description: customerID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: latePaymentAmount
+          in: query
+          description: latePaymentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: latePaymentAmount_mode
+          in: query
+          description: latePaymentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/latepaymentsData'
+        '400':
+          description: Invalid status value
+/latepayments/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - latepayments
+      summary: List Late Payments
+      description: get all data without paging
+      parameters: 
+       
+        - name: customerID
+          in: query
+          description: customerID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: customerID_mode
+          in: query
+          description: customerID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: transactionID
+          in: query
+          description: transactionID values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: transactionID_mode
+          in: query
+          description: transactionID mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: latePaymentAmount
+          in: query
+          description: latePaymentAmount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: latePaymentAmount_mode
+          in: query
+          description: latePaymentAmount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: createBy
+          in: query
+          description: createBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createBy_mode
+          in: query
+          description: createBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateBy
+          in: query
+          description: updateBy values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateBy_mode
+          in: query
+          description: updateBy mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: partnerId
+          in: query
+          description: partnerId values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: partnerId_mode
+          in: query
+          description: partnerId mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: status
+          in: query
+          description: status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: status_mode
+          in: query
+          description: status mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/latepaymentsData'
+        '400':
+          description: Invalid status value
+/latepayments/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - latepayments
+      summary: List latepayments
+      description: Keyward search data on 
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on 
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/latepaymentsData'
+        '400':
+          description: Invalid status value
+/latepayments/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - latepayments
+      summary: List latepayments
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Late Payments by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/latepaymentsData'
+        '400':
+          description: Invalid status value
+definitions:
+  latepayments:
+      type: object
+      properties:
+        
+        customerID:
+            type: integer
+        transactionID:
+            type: integer
+        latePaymentAmount:
+            type: number
+            format: double
+        latePaymentDate:
+            type: string
+            format: date-time
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+        status:
+            type: integer
+          
+
+  latepaymentsData:
+      type: object
+      properties:
+      
+        customerID:
+            type: integer
+        transactionID:
+            type: integer
+        latePaymentAmount:
+            type: number
+            format: double
+        latePaymentDate:
+            type: string
+            format: date-time
+        createBy:
+            type: string
+        createAt:
+            type: string
+            format: date-time
+        updateBy:
+            type: string
+        updateAt:
+            type: string
+            format: date-time
+        partnerId:
+            type: integer
+        status:
+            type: integer
+          
+    
