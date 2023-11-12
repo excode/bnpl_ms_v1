@@ -4,7 +4,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import com.java.bnpl.ucodeutility.QueryEnum;
 import com.java.bnpl.ucodeutility.SortEnum;
-public class AccessPermissionQuery  extends AccessPerm{
+public class AccessPermissionQuery  extends AccessPermission{
 	@Getter @Setter private QueryEnum endPointname_mode ;
 	@Getter @Setter private String[] endPointname_array ;
 	@Getter @Setter private QueryEnum add_mode ;

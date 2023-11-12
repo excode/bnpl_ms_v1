@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.java.bnpl.auth.AuthenticationResponse;
-import com.java.bnpl.accesspermission.AccessPerm;
+import com.java.bnpl.accesspermission.AccessPermission;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import com.java.bnpl.ucodeutility.PagingData;
@@ -38,7 +38,7 @@ public class AccessPermissionRestControllerTests {
     private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
     private String token; //Auth token
-    private AccessPerm oneAccessPermission= new AccessPerm();   
+    private AccessPermission oneAccessPermission= new AccessPermission();   
     
     private void loginAndGetToken() throws Exception {
         String response = mockMvc.perform(MockMvcRequestBuilders.post("/auth")
@@ -119,7 +119,7 @@ public class AccessPermissionRestControllerTests {
         if(oneAccessPermission.getEndPointname()==null){
             GetOneAccessPermission();
         }
-        AccessPerm updateAccessPermission = new AccessPerm();
+        AccessPermission updateAccessPermission = new AccessPermission();
             updateAccessPermission.setEndPointname("inclf");
     updateAccessPermission.setAdd(false);
     updateAccessPermission.setEdit(false);
@@ -193,15 +193,15 @@ public class AccessPermissionRestControllerTests {
         if(oneAccessPermission_.getDocs().size()>0){
         int i =oneAccessPermission_.getDocs().size();
         List<LinkedHashMap<String, Object>> one= oneAccessPermission_.getDocs();
-        AccessPerm obj =convertToAccessPermission( one.get(i-1)); // last one
+        AccessPermission obj =convertToAccessPermission( one.get(i-1)); // last one
         this.oneAccessPermission = obj;
         }
      }
-    private static AccessPerm convertToAccessPermission(LinkedHashMap<String, Object> entry) {
+    private static AccessPermission convertToAccessPermission(LinkedHashMap<String, Object> entry) {
         // Extract the necessary data from the LinkedHashMap and create a AccessPermission object
         
         // Retrieve other properties as needed
-        AccessPerm objCls = new AccessPerm();
+        AccessPermission objCls = new AccessPermission();
         
           String endPointname = (String) entry.get("endPointname");
           objCls.setEndPointname(endPointname);

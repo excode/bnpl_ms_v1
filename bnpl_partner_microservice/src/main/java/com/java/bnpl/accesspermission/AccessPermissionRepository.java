@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
     
 
 @Repository
-public interface AccessPermissionRepository extends JpaRepository<AccessPerm,Long>{
+public interface AccessPermissionRepository extends JpaRepository<AccessPermission,Long>{
 
 
-Optional<AccessPerm>  findById(Long id);
+Optional<AccessPermission>  findById(Long id);
     
 }

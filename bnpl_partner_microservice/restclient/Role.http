@@ -1,6 +1,6 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTY3OTc1NywiZXhwIjoxNjk5Njk0MTU3fQ.hB7CiLtx6LRWLttMjbV--9ttZdX9gqc8a-_V5JR531ByJRtmmej_mMj74cowsHqg
-@TESTID = testID
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
+@TESTID = 2
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 POST {{HOST}}/auth HTTP/1.1
 content-type: application/json
@@ -32,22 +32,14 @@ Authorization: Bearer {{AUTH}}
 GET {{HOST}}/role/{{TESTID}} HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
-###
-PUT {{HOST}}/role/{{TESTID}} HTTP/1.1
-Authorization: Bearer {{AUTH}}
-content-type: application/json
 
-{
-"name":"tempor",
-"status":"1"
-}
 ###
 PATCH {{HOST}}/role/{{TESTID}} HTTP/1.1
 Authorization: Bearer {{AUTH}}
 content-type: application/json
 
 {
-"name":"tempor",
+"name":"Manager2",
 "status":"1"
 }
 ###

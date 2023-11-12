@@ -33,7 +33,7 @@ public class AccessPermissionService {
     
 
     
-    public PagingData<List<AccessPerm>> getAccessPermissions(AccessPermissionQuery accessPermissionQuery){
+    public PagingData<List<AccessPermission>> getAccessPermissions(AccessPermissionQuery accessPermissionQuery){
         
        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
        List<Query> query=buildAccessPermissionQuery(accessPermissionQuery);
@@ -42,12 +42,12 @@ public class AccessPermissionService {
        int page = accessPermissionQuery.getPage()>0 ?accessPermissionQuery.getPage():0;
        Object countResult = query.get(1).getSingleResult();
        int count = countResult!= null ? Integer.parseInt(countResult.toString()) : 0;
-       List<AccessPerm> resultList =  query.get(0).setMaxResults(size).setFirstResult(size*page).getResultList();
+       List<AccessPermission> resultList =  query.get(0).setMaxResults(size).setFirstResult(size*page).getResultList();
        
      return new PagingData<>(Long.valueOf(count),resultList,Long.valueOf(page),size) ;
 
 	}
-    public AccessPerm getAccessPermission(Long id){
+    public AccessPermission getAccessPermission(Long id){
         AccessPermissionQuery accessPermissionQuery=new AccessPermissionQuery();
         accessPermissionQuery.setId(id);
         accessPermissionQuery.setId_mode(QueryEnum.equals);
@@ -59,7 +59,7 @@ public class AccessPermissionService {
          accessPermissionQuery.setCreatedBy(username);
          */
         List<Query> query=buildAccessPermissionQuery(accessPermissionQuery);
-        List<AccessPerm> resultList =  query.get(0).setMaxResults(1).getResultList();
+        List<AccessPermission> resultList =  query.get(0).setMaxResults(1).getResultList();
         if(resultList.size()==0){
            
             throw new CustomeException("NOT_FOUND",null);
@@ -67,23 +67,23 @@ public class AccessPermissionService {
         return  resultList.get(0);
 	}
 
-    public List<AccessPerm> getAccessPermissionSuggestions(AccessPermissionQuery accessPermissionQuery){
+    public List<AccessPermission> getAccessPermissionSuggestions(AccessPermissionQuery accessPermissionQuery){
        
         String[] cols={"endpointname","username"};
         accessPermissionQuery.setKeywordColumns(cols);
     
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<Query> query=buildAccessPermissionQuery(accessPermissionQuery);
-        List<AccessPerm> resultList =  query.get(0).setMaxResults(50).getResultList();
+        List<AccessPermission> resultList =  query.get(0).setMaxResults(50).getResultList();
        
      return resultList ;
 
 	}
-    public List<AccessPerm> getAccessPermissionAll(AccessPermissionQuery accessPermissionQuery){
+    public List<AccessPermission> getAccessPermissionAll(AccessPermissionQuery accessPermissionQuery){
        
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<Query> query=buildAccessPermissionQuery(accessPermissionQuery);
-        List<AccessPerm> resultList =  query.get(0).setMaxResults(50).getResultList();
+        List<AccessPermission> resultList =  query.get(0).setMaxResults(50).getResultList();
        
      return resultList ;
 
@@ -91,7 +91,7 @@ public class AccessPermissionService {
     
 
 
-    public AccessPerm addNewAccessPermission(AccessPerm accessPermission) {
+    public AccessPermission addNewAccessPermission(AccessPermission accessPermission) {
        
         return accessPermissionRepository.save(accessPermission);
     }
@@ -122,8 +122,8 @@ public class AccessPermissionService {
     }
 
      @Transactional
-     public AccessPerm updateAccessPermission(Long id, AccessPerm accessPermission) {
-        AccessPerm check = accessPermissionRepository.findById(id).orElseThrow(()->
+     public AccessPermission updateAccessPermission(Long id, AccessPermission accessPermission) {
+        AccessPermission check = accessPermissionRepository.findById(id).orElseThrow(()->
            new IllegalStateException("NOT_FOUND"));
                                      
     if(accessPermission.getEndPointname()!=null && accessPermission.getEndPointname().length()>0 && !Objects.equals(check.getEndPointname(),accessPermission.getEndPointname())){
@@ -290,8 +290,8 @@ public class AccessPermissionService {
                 sb.append( " order by  s."+accessPermissionQuery.getSortBy());
             }
         }
-        Query query = entityManager.createQuery(sb.toString(),AccessPerm.class);
-        Query queryTotal = entityManager.createQuery(sbTotal.toString(),AccessPerm.class);
+        Query query = entityManager.createQuery(sb.toString(),AccessPermission.class);
+        Query queryTotal = entityManager.createQuery(sbTotal.toString(),AccessPermission.class);
         // Fill Parameters values 
 
         

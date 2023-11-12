@@ -43,7 +43,7 @@ public class AccessPermissionController {
     }
 
    @GetMapping
-   public PagingData<List<AccessPerm>> getAccessPermissions(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
+   public PagingData<List<AccessPermission>> getAccessPermissions(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
         try{
             if (result.hasErrors()) {
                 List<String> errorMessages = result.getAllErrors().stream()
@@ -59,7 +59,7 @@ public class AccessPermissionController {
    }
    
    @GetMapping(path="/{accesspermissionId}")
-   public AccessPerm getAccessPermission(@PathVariable("accesspermissionId") Long id){
+   public AccessPermission getAccessPermission(@PathVariable("accesspermissionId") Long id){
         try{
             return accesspermissionService.getAccessPermission(id);
         }  catch(Exception e){  
@@ -68,7 +68,7 @@ public class AccessPermissionController {
    }
 
    @GetMapping(path="/all")
-   public List<AccessPerm> getAccessPermissionAll(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
+   public List<AccessPermission> getAccessPermissionAll(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
         try{
             if (result.hasErrors()) {
                 List<String> errorMessages = result.getAllErrors().stream()
@@ -83,7 +83,7 @@ public class AccessPermissionController {
    }
 
    @GetMapping(path="/suggestions")
-   public List<AccessPerm> getAccessPermissionSuggestions(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
+   public List<AccessPermission> getAccessPermissionSuggestions(@Validated(IDataSearch.class) AccessPermissionQuery accesspermissionQuery, BindingResult result){
         try{
             if (result.hasErrors()) {
                 List<String> errorMessages = result.getAllErrors().stream()
@@ -98,7 +98,7 @@ public class AccessPermissionController {
     }
     
    @PostMapping
-   public AccessPerm addNewAccessPermission(@RequestBody @Validated(IDataAdd.class) AccessPerm accesspermission, BindingResult result){
+   public AccessPermission addNewAccessPermission(@RequestBody @Validated(IDataAdd.class) AccessPermission accesspermission, BindingResult result){
       try{
         if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors().stream()
@@ -125,7 +125,7 @@ public class AccessPermissionController {
    }
 
    @PatchMapping(path="{accesspermissionId}")
-   public void updateAccessPermission(@PathVariable("accesspermissionId") Long id,@RequestBody AccessPerm accesspermission, BindingResult result){
+   public void updateAccessPermission(@PathVariable("accesspermissionId") Long id,@RequestBody AccessPermission accesspermission, BindingResult result){
     try{
         if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors().stream()

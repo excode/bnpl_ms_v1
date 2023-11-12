@@ -1,5 +1,5 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTc4MTQ0NywiZXhwIjoxNjk5Nzk1ODQ3fQ.1H_JVYOA47IVu--pm488tI1BEE5KprKAH8kgpTcfb1gTeWAV1nWyaRp0y2GmDKIl
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
 @TESTID = 1
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 POST {{HOST}}/auth HTTP/1.1
@@ -16,8 +16,8 @@ content-type: application/json
 
 {
 "contactName":"nisi",
-"email":"eu55@ucode.ai9",
-"phone":"60154754075808",
+"email":"eu5545@ucode.ai9",
+"phone":"6015554754075808",
 "address":"Non tempor labore adipisicing voluptate nisi excepteur consectetur anim in elit.",
 "bussinessName":"euclf",
 "logo":"",
