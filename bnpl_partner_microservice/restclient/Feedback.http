@@ -1,5 +1,5 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTg0NjY4MCwiZXhwIjoxNjk5ODYxMDgwfQ.bJZeCVlR1t9GwbsANZWdEB3CUqSiOzxLgLTGSVKzPjRtdt0ItW6hrJu72D9e7027
 @TESTID = 4
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 POST {{HOST}}/auth HTTP/1.1
@@ -27,7 +27,7 @@ GET {{HOST}}/feedback? HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###
-GET {{HOST}}/feedback?partnerId=1&rating=1.95000000&feedbackText=Ad volupta&submissionDate=2023-12-08 HTTP/1.1
+GET {{HOST}}/feedback?partnerId=1&rating= 1.95&feedbackText=Ad voluptate eiusmod labore ad ut culpa est excepteur ipsum eu officia veniam. HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###

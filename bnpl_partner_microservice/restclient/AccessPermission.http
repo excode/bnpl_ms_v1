@@ -1,5 +1,5 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTg0NzEwMiwiZXhwIjoxNjk5ODYxNTAyfQ.JeWWb0hJFqFZHK_cehVoBvaFA08kaeaEM-QIPAbBb5jd324Fgy2_8eXAtqagS8SW
 @TESTID = 3
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 POST {{HOST}}/auth HTTP/1.1
@@ -29,7 +29,7 @@ GET {{HOST}}/accesspermission? HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###
-GET {{HOST}}/accesspermission?endPointname=commodo&add=false&edit=false&read=false&delete=false&username=irure HTTP/1.1
+GET {{HOST}}/accesspermission?endPointname=commodo HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###

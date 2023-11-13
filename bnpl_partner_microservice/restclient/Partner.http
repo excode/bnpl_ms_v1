@@ -1,5 +1,5 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjU5OTZmYTkxLWFkMWItNDgzMC1hZDMxLTJmYWM3YjM5NjBhMSIsImZpcnN0bmFtZSI6IkJOUEwiLCJwZXJtaXNzaW9uTGV2ZWwiOjEsIm1vYmlsZSI6IjYwMTc2NDA4MjUwIiwidXNlcklkIjoiNTk5NmZhOTEtYWQxYi00ODMwLWFkMzEtMmZhYzdiMzk2MGExIiwid2ViQWNjZXNzIjoxLCJlbWFpbCI6Im51ckBibnBsLmNvbSIsImxhc3RuYW1lIjoiVGVzdCIsInN1YiI6Im51ckBibnBsLmNvbSIsImlhdCI6MTY5OTg0NjE4OCwiZXhwIjoxNjk5ODYwNTg4fQ.v-mMALMu9mavhb4Wz42qHb0kJJ7tV6TJjlK2RqQWF_GblVqpoCu-TfdRV-wcujP3
 @TESTID = 1
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 POST {{HOST}}/auth HTTP/1.1
@@ -55,7 +55,7 @@ GET {{HOST}}/partner? HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###
-GET {{HOST}}/partner?contactName=nisi&email=eu@ucode.a&phone=6017540758&address=Non tempor&bussinessName=euclf&logo=&facebook=https://ex&instagram=https://uc&twitter=https://uc&whatsapp=https://ex&youtube=https://my&agreement=&city=officia&state=inclf&zipcode=1&commision=1.35&limit=1.35&password=ucode1234 HTTP/1.1
+GET {{HOST}}/partner?contactName=nisi&email=eu55@ucode.ai9&phone=60154754075808&address=Non tempor labore adipisicing voluptate nisi excepteur consectetur anim in elit.&bussinessName=euclf HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###

@@ -1,5 +1,5 @@
 @HOST = http://localhost:8080
-@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTgwOTA2OSwiZXhwIjoxNjk5ODIzNDY5fQ.ierpa0hvxAXLJOi5oT6zjEMqcua97gMqIkxBEh3pDVdvwKIAUTjJjyzEIwKjv5Oh
+@AUTH = eyJhbGciOiJIUzM4NCJ9.eyJpbWFnZSI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsImZpcnN0bmFtZSI6InVDb2RlIiwicGVybWlzc2lvbkxldmVsIjoxLCJtb2JpbGUiOiI2MDE3NjQwODI1MCIsInVzZXJJZCI6IjkyODkzZGUwLWI0ZWYtNGM3NS04ZjU2LTA1ZmExNzI1ZmIyOSIsIndlYkFjY2VzcyI6MSwiZW1haWwiOiJ0ZXN0QHVjb2RlLmFpIiwibGFzdG5hbWUiOiJUZXN0Iiwic3ViIjoidGVzdEB1Y29kZS5haSIsImlhdCI6MTY5OTg0Njk4NiwiZXhwIjoxNjk5ODYxMzg2fQ.trAyZU0RpWmH7EHtAEUpWg6kuJajsgk4ifLqbY2AeCn1Fr6AWATaNcuXE2-vOoTC
 @TESTID = 4
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 
@@ -29,7 +29,7 @@ GET {{HOST}}/apiactivity? HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###
-GET {{HOST}}/apiactivity?partnerId=1&aPIKeyID=adipisicin&aPICallName=magna&aPICallResult=minim&errorDetails=dolor HTTP/1.1
+GET {{HOST}}/apiactivity?partnerId=2&apikeyID=deserunt&apicallName=magna&apicallResult=minim&errorDetails=dolor HTTP/1.1
 Authorization: Bearer {{AUTH}}
 
 ###
