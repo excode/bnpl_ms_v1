@@ -1,40 +1,40 @@
-server:
-  port: 8084
+# server:
+#   port: 8084
 
-spring:
-  application:
-    name: API-GATEWAY
+# spring:
+#   application:
+#     name: API-GATEWAY
 
 
-  cloud:
-    gateway:
-      routes:
-        - id: PARTNER-SERVICE
-          uri: lb://PARTNER-SERVICE
-          predicates:
-            - Path=/{segment}
-            #- Path=/users/**
+#   cloud:
+#     gateway:
+#       routes:
+#         - id: PARTNER-SERVICE
+#           uri: lb://PARTNER-SERVICE
+#           predicates:
+#             - Path=/{segment}
+#             #- Path=/users/**
 
-        # - id: SCHEDULING-SERVICE
-        #   uri: lb://SCHEDULING-SERVICE
-        #   predicates:
-        #     - Path=/{segment}  
+#         # - id: SCHEDULING-SERVICE
+#         #   uri: lb://SCHEDULING-SERVICE
+#         #   predicates:
+#         #     - Path=/{segment}  
 
-        # - id: SETTLEMENT-SERVICE
-        #   uri: lb://SETTLEMENT-SERVICE
-        #   predicates:
-        #     - Path=/{segment}
+#         # - id: SETTLEMENT-SERVICE
+#         #   uri: lb://SETTLEMENT-SERVICE
+#         #   predicates:
+#         #     - Path=/{segment}
 
-        # - id: TRANSACTION-SERVICE
-        #   uri: lb://TRANSACTION-SERVICE
-        #   predicates:
-        #     - Path=/{segment}
+#         # - id: TRANSACTION-SERVICE
+#         #   uri: lb://TRANSACTION-SERVICE
+#         #   predicates:
+#         #     - Path=/{segment}
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+# eureka:
+#   instance:
+#     prefer-ip-address: true
+#   client:
+#     fetch-registry: true
+#     register-with-eureka: true
+#     service-url:
+#       defaultZone: http://localhost:8761/eureka

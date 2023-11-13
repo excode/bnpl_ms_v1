@@ -1,36 +1,36 @@
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
-  application:
-    name: PARTNER-SERVICE
+# spring:
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+#     properties:
+#       hibernate.format_sql: true
+#   application:
+#     name: PARTNER-SERVICE
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/bnpl_partner
-    username: root
-    password: admin008
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  servlet:
-    multipart:
-      max-file-size: 200KB
-      max-request-size: 1000KB
-  main:
-    allow-bean-definition-overriding: true
-    lazy-initialization: true
+#   datasource:
+#     url: jdbc:mysql://localhost:3306/bnpl_partner
+#     username: root
+#     password: admin008
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+#   servlet:
+#     multipart:
+#       max-file-size: 200KB
+#       max-request-size: 1000KB
+#   main:
+#     allow-bean-definition-overriding: true
+#     lazy-initialization: true
 
-server:
-  error:
-    include-message: always
-  port: 8080
+# server:
+#   error:
+#     include-message: always
+#   port: 8080
 
-eureka:
- instance:
-   prefer-ip-address: true
- client:
-   fetch-registry: true
-   register-with-eureka: true
-   service-url:
-     defaultZone: http://localhost:8761/eureka
+# eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
