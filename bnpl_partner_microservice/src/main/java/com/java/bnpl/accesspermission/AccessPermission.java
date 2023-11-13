@@ -3,6 +3,7 @@ package com.java.bnpl.accesspermission;
 import com.java.bnpl.config.Auditable;
 import com.java.bnpl.interfaces.IDataAdd;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,6 @@ public class AccessPermission extends Auditable {
     @Id
 
     @SequenceGenerator(name = "accespermisson_sequence", sequenceName = "accespermisson_sequence", allocationSize = 1)
-
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accespermisson_sequence")
     private Long id;
 
@@ -31,23 +31,30 @@ public class AccessPermission extends Auditable {
     private String endPointname;
 
     @NotNull(groups = { IDataAdd.class }, message = "add required")
+    @Column(name = "can_add")
+    private Boolean canAdd;
 
-    private Boolean added;
     @Transient
     private String addStr;
-    @NotNull(groups = { IDataAdd.class }, message = "edit required")
 
-    private Boolean edited;
+    @NotNull(groups = { IDataAdd.class }, message = "edit required")
+    @Column(name = "can_edit")
+    private Boolean canEdit;
+
     @Transient
     private String editStr;
-    @NotNull(groups = { IDataAdd.class }, message = "read required")
 
-    private Boolean readed;
+    @NotNull(groups = { IDataAdd.class }, message = "read required")
+    @Column(name = "can_view")
+    private Boolean canView;
+
     @Transient
     private String readStr;
-    @NotNull(groups = { IDataAdd.class }, message = "delete required")
 
-    private Boolean deleted;
+    @NotNull(groups = { IDataAdd.class }, message = "delete required")
+    @Column(name = "can_delete")
+    private Boolean canDelete;
+
     @Transient
     private String deleteStr;
     @NotBlank(groups = { IDataAdd.class }, message = "username required")
@@ -70,15 +77,15 @@ public class AccessPermission extends Auditable {
     }
 
     public Boolean getAdd() {
-        return added;
+        return canAdd ;
     }
 
     public void setAdd(Boolean val) {
-        this.added = val;
+        this.canAdd  = val;
     }
 
     public Boolean isAdd() {
-        return this.added;
+        return this.canAdd ;
     }
 
     public String getAddStr() {
@@ -88,22 +95,22 @@ public class AccessPermission extends Auditable {
     public void setAddStr(String val) {
         this.addStr = val;
         try {
-            this.added = Boolean.valueOf(val);
+            this.canAdd  = Boolean.valueOf(val);
         } catch (Exception w) {
-            // this.added =null
+            // this.canAdd  =null
         }
     }
 
     public Boolean getEdit() {
-        return edited;
+        return canEdit;
     }
 
     public void setEdit(Boolean val) {
-        this.edited = val;
+        this.canEdit = val;
     }
 
     public Boolean isEdit() {
-        return this.edited;
+        return this.canEdit;
     }
 
     public String getEditStr() {
@@ -113,22 +120,22 @@ public class AccessPermission extends Auditable {
     public void setEditStr(String val) {
         this.editStr = val;
         try {
-            this.edited = Boolean.valueOf(val);
+            this.canEdit = Boolean.valueOf(val);
         } catch (Exception w) {
-            // this.edited =null
+            // this.canEdit =null
         }
     }
 
     public Boolean getRead() {
-        return readed;
+        return canView;
     }
 
     public void setRead(Boolean val) {
-        this.readed = val;
+        this.canView = val;
     }
 
     public Boolean isRead() {
-        return this.readed;
+        return this.canView;
     }
 
     public String getReadStr() {
@@ -138,22 +145,22 @@ public class AccessPermission extends Auditable {
     public void setReadStr(String val) {
         this.readStr = val;
         try {
-            this.readed = Boolean.valueOf(val);
+            this.canView = Boolean.valueOf(val);
         } catch (Exception w) {
-            // this.readed =null
+            // this.canView =null
         }
     }
 
     public Boolean getDelete() {
-        return deleted;
+        return canDelete;
     }
 
     public void setDelete(Boolean val) {
-        this.deleted = val;
+        this.canDelete = val;
     }
 
     public Boolean isDelete() {
-        return this.deleted;
+        return this.canDelete;
     }
 
     public String getDeleteStr() {
@@ -163,9 +170,9 @@ public class AccessPermission extends Auditable {
     public void setDeleteStr(String val) {
         this.deleteStr = val;
         try {
-            this.deleted = Boolean.valueOf(val);
+            this.canDelete = Boolean.valueOf(val);
         } catch (Exception w) {
-            // this.deleted =null
+            // this.canDelete =null
         }
     }
 
